@@ -1,0 +1,95 @@
+version: '3.9'
+
+services:
+  weshopify-categories-db-service:
+    container_name: weshopify-categories-db
+    image: mysql:latest
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=weshopify-category
+
+
+  weshopify-registry-svc:
+    container_name: weshopify-registry
+    image: weshopify-service-registry-img
+    restart: on-failure
+    ports:
+      - 8761:8761
+
+  weshopify-axon-server:
+    container_name: weshopify-event-store
+    image: axoniq/axonserver
+    ports:
+      - 8124:8124
+      - 8024:8024
+
+  weshopify-authentication-svc:
+    container_name: weshopify-authentication-service
+    image: weshopify-auth-svc-img
+    restart: on-failure
+    ports:
+      - 5022:5022
+    environment:
+      - WSO2_SERVER_HOST_NAME=iam.weshopifys.shop
+      - GRANT_TYPE=password
+      - SCOPE=openid
+      - CLIENT_ID=YxIlY5MY9xmA8edTw9VWyHrsR8Ya
+      - CLIENT_SECRET=VJdtfbIj4ZfX8DrlFPCwCByEVpsa
+      - REDIS_SERVER_HOST=cache.weshopifys.shop
+      - REDIS_SERVER_PORT=80
+      - REDIS_SERVER_PASSWORD=Redis123$$
+      - AUTHN_SERVICE_PORT=5022
+
+  weshopify-brands-svc:
+    container_name: weshopify-brands-svc
+    image: weshopify-brands-svc-img
+    restart: on-failure
+    ports:
+      - 5018:5018
+    environment:
+      - CATEGORIES_DB_HOST=weshopify-brands-db-service
+      - CATEGORIES_DB_PASSWORD=test
+      - CATEGORIES_DB_SCHEMA=weshopify-brands
+      - REDIS_SERVER_HOST=cache.weshopifys.shop
+      - REDIS_SERVER_PORT=80
+      - REDIS_SERVER_PASSWORD=Redis123$$
+      - SERVICE_REGISTRY_HOST=weshopify-registry-svc
+      - SERVICE_REGISTRY_PORT=8761
+      - AXON_SERVER_HOST=weshopify-axon-server
+      - AXON_SERVER_PORT=8124
+      - CATEGORIES_SVC_HOST=weshopify-categories-svc
+      - CATEGORIES_SVC_PORT=5016
+
+
+  weshopify-categories-svc:
+    container_name: weshopify-categories-svc
+    image: weshopify-categories-svc-img
+    restart: on-failure
+    ports:
+      - 5016:5016
+    environment:
+      - CATEGORIES_DB_HOST=weshopify-categories-db-service
+      - CATEGORIES_DB_PASSWORD=test
+      - CATEGORIES_DB_SCHEMA=weshopify-category
+      - REDIS_SERVER_HOST=cache.weshopifys.shop
+      - REDIS_SERVER_PORT=80
+      - REDIS_SERVER_PASSWORD=Redis123$$
+      - SERVICE_REGISTRY_HOST=weshopify-registry-svc
+      - SERVICE_REGISTRY_PORT=8761
+      - AXON_SERVER_HOST=weshopify-axon-server
+      - AXON_SERVER_PORT=8124
+
+  weshopify-usermgmt-svc:
+    container_name: weshopify-usermgmt-svc
+    image: weshopify-usermgmt-img
+    restart: on-failure
+    ports:
+      - 5014:5014
+    environment:
+      - WSO2_SERVER_HOST_NAME=iam.weshopifys.shop
+      - WSO2_SERVER_USER_NAME=admin
+      - WSO2_SERVER_USER_PASSWORD=admin
+

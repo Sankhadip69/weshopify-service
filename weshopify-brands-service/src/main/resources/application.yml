@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: ${BRAND_SVC_NAME:weshopify-brands-service}
+  datasource:
+    url: 'jdbc:${BRANDS_DB_TYPE:mysql}://${BRANDS_DB_HOST:localhost}:${BRANDS_DB_PORT:3306}/${BRANDS_DB_NAME:weshopify-brands}'
+    username: '${BRANDS_DB_USER:root}'
+    password: '${BRANDS_DB_PASSWORD:test}'
+  jpa:
+    hibernate:
+      ddl-auto: '${BRANDS_DB_DDL_AUTO:update}'
+
+
+  cloud:
+    loadbalancer:
+      enabled: true
+
+  data:
+    redis:
+      host: '${REDIS_SERVER_HOST:cache.weshopifys.shop}'
+      port: '${REDIS_SERVER_PORT:80}'
+      password: '${REDIS_SERVER_PASSWORD:Redis123$}'
+
+server:
+  port: ${BRAND_SVC_PORT:5018}
+
+axon:
+  axonserver:
+    servers: ${AXON_SERVER_HOST:localhost}:${AXON_SERVER_PORT:8024}
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${SERVICE_REGISTRY_HOST:localhost}:${SERVICE_REGISTRY_PORT:8761}/eureka/
+  instance:
+    hostname: ${SERVICE_REGISTRY_HOST:localhost}
+
+
+
+services:
+  categories:
+    #base-uri: '${CATEGORIES_BASE_URI:http://localhost:5016/categories}'
+    base-uri: http://${CATEGORIES_SVC_HOST:localhost}:${CATEGORIES_SVC_PORT:5016}
+    #access-token: eyJ4NXQiOiJNell4TW1Ga09HWXdNV0kwWldObU5EY3hOR1l3WW1NNFpUQTNNV0kyTkRBelpHUXpOR00wWkdSbE5qSmtPREZrWkRSaU9URmtNV0ZoTXpVMlpHVmxOZyIsImtpZCI6Ik16WXhNbUZrT0dZd01XSTBaV05tTkRjeE5HWXdZbU00WlRBM01XSTJOREF6WkdRek5HTTBaR1JsTmpKa09ERmtaRFJpT1RGa01XRmhNelUyWkdWbE5nX1JTMjU2IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJXZXNob3BpZnktQWRtaW4iLCJhdXQiOiJBUFBMSUNBVElPTl9VU0VSIiwiaXNzIjoiaHR0cHM6XC9cL2xvY2FsaG9zdDo5NDQzXC9vYXV0aDJcL3Rva2VuIiwiZ3JvdXBzIjpbIkludGVybmFsXC9ldmVyeW9uZSIsIkFwcGxpY2F0aW9uXC9FZGl0b3IiLCJBcHBsaWNhdGlvblwvV2VzaG9waWZ5LUFkbWluIl0sImdpdmVuX25hbWUiOiJXZXNob3BpZnktQWRtaW5pc3RyYXRvciIsImF1ZCI6Ill4SWxZNU1ZOXhtQThlZFR3OVZXeUhyc1I4WWEiLCJXZXNob3BpZnlVc2VySWQiOiI4MmE1ODM2Zi03ODMzLTRhZTQtOGIzZi01ODA2YzQ5OGViMzQiLCJuYmYiOjE3MTA2MDg3NzQsImF6cCI6Ill4SWxZNU1ZOXhtQThlZFR3OVZXeUhyc1I4WWEiLCJzY29wZSI6Im9wZW5pZCIsIldlc2hvcGlmeVVzZXJNb2JpbGUiOiI5ODc2NTQzMjEwIiwiZXhwIjoxNzEwNjEyMzc0LCJpYXQiOjE3MTA2MDg3NzQsImZhbWlseV9uYW1lIjoiV2VzaG9waWZ5IiwianRpIjoiOGM0MGJlM2QtNDMxMy00M2UyLWJhZDEtYmUxMzMyMTc0NmY1IiwiZW1haWwiOiJ3ZXNob3BpZnktYWRtaW5AeW9wbWFpbC5jb20ifQ.HKmsS_j5qWHp5svkPJRvYT2I-A7NRRJuXXr1sAM_3qfE4L1TqEFzXqy41W-mEl67EYtyOPyUW_OgSU4pkvtCGpX24Kpb3ViouKOdsx2tj7a8Ucu_M8_Ccc-tAYSCE5tebFpkBE-uwOfMK0PM4etAsNozvFu66fjbWHtHL1yEA5RxisZMbvF1MRjYNpY7pd_-BmUL2XRGNuV_nf5ZNswdJSXgLAz_EgC5OHxwtM1r3Unr3SedYbpMb0v7-MqtGm4xzK1TeM5THK9V9BdtaETCD_DqWxaI9INRyKPrp9sOlMmtIPbsBsRXmlxCEICNWCWIfdBVOXTADbNZQb3oO0U9Sg

@@ -1,0 +1,15 @@
+server:
+  port: '${USER_MGMT_SERVICE_PORT:5014}'
+
+spring:
+  application:
+    name: ${USER_SVC_NAME:user-management-service}
+
+iamserver:
+  base-url: https://${WSO2_SERVER_HOST_NAME:iam.weshopifys.shop}/scim2
+  role-api: /Roles
+  user-api: /Users
+  user-name: ${WSO2_SERVER_USER_NAME:admin}
+  password: ${WSO2_SERVER_USER_PASSWORD:admin}
+  role-api-schema: urn:ietf:params:scim:schemas:extension:2.0:Role
+

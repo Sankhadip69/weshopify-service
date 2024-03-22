@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: weshopify-platform-commons
+
+server:
+  port: 5000

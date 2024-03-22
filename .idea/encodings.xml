@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/weshopify-auth-management-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/weshopify-authentication-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/weshopify-brands-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/weshopify-category-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/weshopify-platform-commons/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/weshopify-platform-service-registry/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/weshopify-usermgmt-service/src/main/java" charset="UTF-8" />
+  </component>
+</project>
